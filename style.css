@@ -1,0 +1,9 @@
+.panel-body a {
+    word-break: break-all;
+}
+
+#tableHead {
+    border-top: solid 2px;
+    border-bottom: solid 2px;
+    border-color: lightgrey;
+}
