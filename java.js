@@ -19,6 +19,9 @@ firebase.initializeApp(firebaseConfig);
 
 var database = firebase.database();
 
+
+
+
 $("#submit").on("click", function () {
     event.preventDefault()
 
@@ -28,6 +31,8 @@ $("#submit").on("click", function () {
     frequency = $("#frequencySearch").val().trim();
 
 
+    reset();
+
     database.ref().push({
         name: trainName,
         destination: destination,
@@ -36,10 +41,18 @@ $("#submit").on("click", function () {
         dateAdded: firebase.database.ServerValue.TIMESTAMP
     });
 
+
 });
 
-database.ref().on("child_added", function (snapshot) {
+function reset() {
+    $("#nameSearch").val("");
+    $("#destinationSearch").val("");
+    $("#firstTrainSearch").val("");
+    $("#frequencySearch").val("");
+}
 
+database.ref().on("child_added", function (snapshot) {
+    console.log('child_added', snapshot);
     var sv = snapshot.val()
 
     //trainTime pushed back a year so it comes before current time
@@ -81,6 +94,5 @@ database.ref().on("child_added", function (snapshot) {
     $("#list").append(newDiv)
 
 })
-
 
 
